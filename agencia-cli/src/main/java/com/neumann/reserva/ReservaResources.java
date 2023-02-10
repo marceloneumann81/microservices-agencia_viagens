@@ -8,9 +8,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import com.neumann.cliente.Cliente;
-import com.neumann.cliente.ClienteService;
-
 
 @Path("/reserva-cli")
 public class ReservaResources {
@@ -19,17 +16,14 @@ public class ReservaResources {
     @RestClient
     ReservaService reservaService;
 
-    @Inject
-    @RestClient
-    ClienteService clienteService;
+    
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("newReserva") 
     public String newReserva(){
 
-        Cliente cliente = clienteService.findById(2);
-        Reserva reserva = Reserva.of(0,cliente);
+        Reserva reserva = Reserva.of(0, 2);
         
         
         return reservaService.newReserva(reserva);

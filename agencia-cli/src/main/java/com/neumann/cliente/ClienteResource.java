@@ -3,6 +3,9 @@ package com.neumann.cliente;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -13,6 +16,12 @@ public class ClienteResource {
     @RestClient
     ClienteService clienteService;
 
+    @GET
+    @Path("findById")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Cliente findById(@QueryParam("id") long id){
+        return clienteService.findById(id);
+    }
     
     @GET
     @Path("newCliente")
